@@ -11,6 +11,8 @@ from classes.statemanager import StateManager
 #   - Plus stupid strings.
 # BE SURE TO ADD ALL OF MY THOUGHTS
 
+# NOTE: Should we have a Binary Input Sanitizer Class? Hmm...
+
 
 def modulo_three(string: str, state_manager: StateManager) -> int:
     """

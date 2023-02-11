@@ -27,6 +27,13 @@ class State:
     one_input = 0
 
     def __init__(self, output: int, zero_input: int, one_input: int) -> None:
+        # Ensure that we're making our States with ints here.
+        for parameter in [output, zero_input, one_input]:
+            if not isinstance(parameter, int):
+                raise TypeError(
+                    "Error! Cannot initialize State with non-integer input."
+                )
+
         self.output = output
         self.zero_input = zero_input
         self.one_input = one_input
