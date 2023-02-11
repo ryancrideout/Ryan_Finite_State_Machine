@@ -95,6 +95,10 @@ class StateManager:
 
         This implementation works for Modulo 3, but I think we'd have to tweak it to work
         with different modulos.
+
+        NOTE: Should have a sanitize input class that gets called here, but also if we
+        cast a string to int and it's all zeros... is that okay? Well, no, we cast
+        ints to strings
         """
         for binary_integer in binary_string:
             input = int(binary_integer)

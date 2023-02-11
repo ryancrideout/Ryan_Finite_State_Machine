@@ -4,6 +4,14 @@ from classes.statemanager import StateManager
 
 
 class TestStatemanager(unittest.TestCase):
+    """
+    I realize after writing a bunch of these tests that I could have had a setUp method
+    or something where I initialize a StateManager once instead of initializing one for
+    each of the tests.
+
+    I'm going to leave it alone for now as the tests still take like no time to run, but
+    that's an optimization that could happen if we need it to.
+    """
 
     # HELPER FUNCTION
     def examine_state_manager_attributes(self, state_manager):
@@ -90,3 +98,63 @@ class TestStatemanager(unittest.TestCase):
 
         state_manager.set_current_state(state_manager.state_list[1])
         self.assertEqual(state_manager.current_state, state_manager.state_list[1])
+
+    def test_set_current_state_non_state_list_case(self):
+        """
+        Try to set the current state for a StateManager with a state that is NOT
+        in the state_list of the StateManager. This will throw an error.
+        """
+        state_manager = StateManager()
+        evil_state = State(output=64, zero_input=-1, one_input=1)
+
+        with self.assertRaises(ValueError) as context:
+            state_manager.set_current_state(evil_state)
+
+            self.assertTrue(
+                "Error! Unrecognized State does not exist in state_list"
+                in context.exception
+            )
+
+    def test_set_current_state_non_state_case(self):
+        """
+        Try to set the state for a StateManager with something that simply
+        isn't a state.
+
+        This includes the meaning of life, unfortunately.
+        """
+        state_manager = StateManager()
+        meaning_of_life = 42
+
+        with self.assertRaises(TypeError) as context:
+            state_manager.set_current_state(meaning_of_life)
+
+            self.assertTrue(
+                "Error! Cannot set State to be a non-state."
+                in context.exception
+            )
+
+    # Test current_state_output
+    def test_current_state_output_success_case(self):
+        """
+        Simple test case where we successfully get the output of our
+        current state.
+        """
+        state_manager = StateManager()
+        self.assertEqual(state_manager.current_state_output, 0)
+
+        state_manager.set_current_state(state_manager.state_list[2])
+        self.assertEqual(state_manager.current_state_output, 2)
+
+    # Test reset_current_state
+    def test_reset_current_state_success_case(self):
+        """
+        This method call should only ever produce one outcome, so I
+        think we can get away with one test.
+        """
+        state_manager = StateManager()
+        state_manager.current_state = "I love Machine Gun Kiss"
+        state_manager.state_index = 4
+
+        state_manager.reset_current_state()
+        self.assertEqual(state_manager.state_index, 0)
+        self.assertEqual(state_manager.current_state, state_manager.state_list[0])

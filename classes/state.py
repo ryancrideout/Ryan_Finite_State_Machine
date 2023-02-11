@@ -27,6 +27,7 @@ class State:
     one_input = 0
 
     def __init__(self, output: int, zero_input: int, one_input: int) -> None:
+        # TODO: Enforce type checking.
         self.output = output
         self.zero_input = zero_input
         self.one_input = one_input

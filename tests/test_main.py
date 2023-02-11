@@ -27,7 +27,7 @@ class TestModuloThree(unittest.TestCase):
         But now I know you guys are going to question me because I said I'm good at Math but
         I looked this up on Google.
         13333 * 3 = 39999.
-        40000 - 39999 - 1.
+        40000 - 39999 = 1.
 
         Hopefully that clears my name?
         """
