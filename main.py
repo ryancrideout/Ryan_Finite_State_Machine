@@ -174,10 +174,6 @@ class StateManager:
         self.current_state = self.state_list[0]
 
 
-# Idea - make modulo_three a method for the state_manager (Hmm...)
-# Or make it so we don't have to initialize the classes every time.
-# Solution - initialize StateManager on start up, then trap the
-# user in a while loop. How devious.
 def modulo_three(string: str, state_manager: StateManager):
     """
     NOTE: Returns float for anticpation of decimal values.
