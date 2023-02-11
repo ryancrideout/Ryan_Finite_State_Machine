@@ -85,8 +85,9 @@ class StateManager:
             State(output=2, zero_input=-1, one_input=0),
         ]
 
-        # Our initial state will always be state 0.
+        # Our initial state will always be state 0. State index will also be 0.
         self.current_state = self.state_list[0]
+        self.state_index = 0
 
     def process_input(self, binary_string: str):
         """
@@ -113,6 +114,11 @@ class StateManager:
         directly in the "process_input" method, I like having this as a separate
         method as it allows for more freedom, and is useful for debugging.
         """
+        if not isinstance(state, State):
+            raise TypeError("Error! Cannot set State to be a non-state.")
+        if state not in self.state_list:
+            raise ValueError("Error! Unrecognized State does not exist in state_list")
+
         self.current_state = state
 
     @property
