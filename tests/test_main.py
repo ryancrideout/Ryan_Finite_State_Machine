@@ -36,6 +36,18 @@ class TestModuloThree(unittest.TestCase):
 
         self.assertEqual(modulo_three(test_input, state_manager), 1)
 
+    def test_modulo_three_integer_40000_case(self):
+        """
+        Test case where we feed the modulo three function the int 40000.
+
+        Luckily I didn't need Google to tell me that 40000, so I should be safe from your
+        scrutiny for now.
+        """
+        test_input = 40000
+        state_manager = StateManager()
+
+        self.assertEqual(modulo_three(test_input, state_manager), 1)
+
     def test_modulo_three_bad_state_manager_case(self):
         """
         Test case where we have an "invalid" StateManager.

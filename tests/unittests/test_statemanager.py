@@ -83,7 +83,28 @@ class TestStatemanager(unittest.TestCase):
         self.examine_state_manager_attributes(state_manager)
 
     # Test process_input
-    # TODO: This will be the meat and potatoes, I think.
+    def test_process_input_basic_case(self):
+        """
+        Testing the process input with a basic test case, such as 41 in binary.
+        101001 Modulo 3 will give us two.
+        """
+        state_manager = StateManager()
+        state_manager.process_input("101001")
+
+        self.assertEqual(state_manager.current_state, state_manager.state_list[2])
+
+    def test_process_input_integer_case(self):
+        """
+        Testing the case where we feed process_input an integer. This wasn't in the
+        original scope, but I figure it'd be nice if the Finite State Machine could
+        work with binary strings and integer inputs.
+
+        After all, most people would call modulo on an integer input.
+        """
+        state_manager = StateManager()
+        state_manager.process_input(41)
+
+        self.assertEqual(state_manager.current_state, state_manager.state_list[2])
 
     # Test sanitize_input
     # TODO: This will come in the future.
@@ -129,8 +150,7 @@ class TestStatemanager(unittest.TestCase):
             state_manager.set_current_state(meaning_of_life)
 
             self.assertTrue(
-                "Error! Cannot set State to be a non-state."
-                in context.exception
+                "Error! Cannot set State to be a non-state." in context.exception
             )
 
     # Test current_state_output
