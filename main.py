@@ -7,6 +7,23 @@
 # BE SURE TO ADD ALL OF MY THOUGHTS
 
 
+class State:
+    output = 0
+
+    # These are the attributes that determine which state we
+    # should move to based on the binary input ("0" or "1") we receive.
+    # This is within the context of the state manager as well - these attributes
+    # are meant to modify the state_index to help the StateManager find the
+    # right state.
+    zero_input = 0
+    one_input = 0
+
+    def __init__(self, output: int, zero_input: int, one_input: int) -> None:
+        self.output = output
+        self.zero_input = zero_input
+        self.one_input = one_input
+
+
 class State_0:
     output = 0
 
@@ -63,14 +80,37 @@ class StateManager:
         self.initialize_states()
 
     def initialize_states(self):
-        state_0 = State_0()
-        state_1 = State_1()
-        state_2 = State_2()
+        """
+        Dear Ryan - please explain the snot out of this. Thanks.
+        """
+        modulo = 3
+        for i in range(modulo):
+            # NOTE: Order matters for these checks. If we did, say "if i % 2" before the last
+            #       state check, we'd initialize the final state incorrectly.
+            if i == 0:
+                # Conditions to initialize the first state (which is state 0)
+                self.state_list.append(State(output=i, zero_input=0, one_input=1))
+            elif i == (modulo - 1):
+                # Conditions for initializing the last state for the state list.
+                if i % 2 == 0:
+                    self.state_list.append(State(output=i, zero_input=-1, one_input=0))
+                else:
+                    self.state_list.append(State(output=i, zero_input=0, one_input=-1))
+            elif i % 2 == 1:
+                # Conditions for initializing odd numbered states
+                self.state_list.append(State(output=i, zero_input=1, one_input=-1))
+            elif i % 2 == 0:
+                # Conditions for initializing even numbered states.
+                self.state_list.append(State(output=i, zero_input=-1, one_input=1))
 
-        self.state_list = [state_0, state_1, state_2]
+        # state_0 = State_0()
+        # state_1 = State_1()
+        # state_2 = State_2()
+
+        # self.state_list = [state_0, state_1, state_2]
 
         # Our initial state will always be state 0.
-        self.current_state = state_0
+        self.current_state = self.state_list[0]
 
     def process_input(self, binary_string: str):
         """
