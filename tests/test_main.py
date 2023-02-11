@@ -36,11 +36,29 @@ class TestModuloThree(unittest.TestCase):
 
         self.assertEqual(modulo_three(test_input, state_manager), 1)
 
+    def test_modulo_three_bad_state_manager_case(self):
+        """
+        Test case where we have an "invalid" StateManager.
+
+        Paul Rudd is a constant source of amusement to me, but he ain't no StateManager.
+        """
+        test_input = "11011"
+        state_manager = "Paul Rudd is an incredibly sexy beast. An absolute unit."
+
+        with self.assertRaises(TypeError) as context:
+            modulo_three(test_input, state_manager)
+
+            # Paul Rudd is a string?
+            self.assertTrue(
+                "Error! Invalid StateManager! Cannot run modulo_three with str"
+                in context.exception
+            )
+
     # TODO: Try out all of the other insane test cases I can think of.
     #   - Accept Binary, Decimal, Hexadecimal, and numbers with decimal values
     #   - Should deal with Negative Values
     #   - Plus stupid strings.
-    #   - Try things that are NOT State Managers either.
+    #   - Try things that are NOT State Managers either. (SOLVED)
 
 
 class TestExecute(unittest.TestCase):
