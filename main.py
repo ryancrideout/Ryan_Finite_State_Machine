@@ -15,7 +15,7 @@ class State_0:
     # This is within the context of the state manager as well - these attributes
     # are meant to modify the state_index to help the StateManager find the
     # right state.
-    # Naming could have been better, but I stuck to consice names.
+    # Naming could have been better, but I stuck to concise names.
     zero_input = 0
     one_input = 1
 
@@ -28,7 +28,7 @@ class State_1:
     # This is within the context of the state manager as well - these attributes
     # are meant to modify the state_index to help the StateManager find the
     # right state.
-    # Naming could have been better, but I stuck to consice names.
+    # Naming could have been better, but I stuck to concise names.
     zero_input = 1
     one_input = -1
 
@@ -41,7 +41,7 @@ class State_2:
     # This is within the context of the state manager as well - these attributes
     # are meant to modify the state_index to help the StateManager find the
     # right state.
-    # Naming could have been better, but I stuck to consice names.
+    # Naming could have been better, but I stuck to concise names.
     zero_input = -1
     one_input = 0
 
@@ -82,10 +82,10 @@ class StateManager:
             # Note: 0's are "Falsy" and 1's are Truthy.
             if input:
                 # 1 as an input
-                self.state_index += self.state_index[self.state_index].one_input
+                self.state_index += self.state_list[self.state_index].one_input
             else:
                 # 0 as an input
-                self.state_index += self.state_index[self.state_index].zero_input
+                self.state_index += self.state_list[self.state_index].zero_input
 
         self.set_current_state(self.state_list[self.state_index])
 
@@ -98,6 +98,10 @@ class StateManager:
         method as it allows for more freedom, and is useful for debugging.
         """
         self.current_state = state
+
+    @property
+    def current_state_output(self):
+        return self.current_state.output
 
 
 # Idea - make modulo_three a method for the state_manager (Hmm...)
@@ -113,10 +117,11 @@ def modulo_three(string: str) -> float:
     """
     state_manager = StateManager()
     state_manager.process_input(string)
+    print(state_manager.current_state_output)
 
 
 def execute():
-    modulo_three("1101")
+    modulo_three("1111")
     print("Done!")
 
 
