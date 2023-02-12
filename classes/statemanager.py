@@ -1,4 +1,5 @@
 from classes.state import State
+from classes.binarystringsanitizer import BinaryStringSanitizer
 
 
 class StateManager:
@@ -72,9 +73,7 @@ class StateManager:
         """
         This is the implementation I was talking about that isn't scalable. If someone wanted to make this
         work with Modulo 5, for example, then they have to manually go in here and add two more States.
-        I don't like that, as I'm pretty sure it violates one of the S.O.L.I.D principles.
-
-        TODO: Actually investigate if it violates S.O.L.I.D. principles haha.
+        Upon further thought, this might be okay. For this exercise this works so I won't worry about it.
         """
         self.state_list = [
             # State 0
@@ -95,11 +94,12 @@ class StateManager:
 
         This implementation works for Modulo 3, but I think we'd have to tweak it to work
         with different modulos.
-
-        NOTE: Should have a sanitize input class that gets called here, but also if we
-        cast a string to int and it's all zeros... is that okay? Well, no, we cast
-        ints to strings
         """
+        # Sanitize our binary string to ensure it's good to work with. If performance
+        # ever became a problem and we were confident about the inputs, we could
+        # probably remove the sanitization check.
+        binary_string = BinaryStringSanitizer.sanitize_input(binary_string)
+
         for binary_integer in binary_string:
             input = int(binary_integer)
             # Note: 0's are "Falsy" and 1's are Truthy.

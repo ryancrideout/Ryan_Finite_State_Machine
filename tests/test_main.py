@@ -36,6 +36,18 @@ class TestModuloThree(unittest.TestCase):
 
         self.assertEqual(modulo_three(test_input, state_manager), 1)
 
+    def test_modulo_three_integer_40000_case(self):
+        """
+        Test case where we feed the modulo three function the int 40000.
+
+        Luckily I didn't need Google to tell me that 40000, so I should be safe from your
+        scrutiny for now.
+        """
+        test_input = 40000
+        state_manager = StateManager()
+
+        self.assertEqual(modulo_three(test_input, state_manager), 1)
+
     def test_modulo_three_bad_state_manager_case(self):
         """
         Test case where we have an "invalid" StateManager.
@@ -54,11 +66,31 @@ class TestModuloThree(unittest.TestCase):
                 in context.exception
             )
 
-    # TODO: Try out all of the other insane test cases I can think of.
-    #   - Accept Binary, Decimal, Hexadecimal, and numbers with decimal values
-    #   - Should deal with Negative Values
-    #   - Plus stupid strings.
-    #   - Try things that are NOT State Managers either. (SOLVED)
+    def test_modulo_three_bad_string_input_case(self):
+        """
+        Test case where we feed the modulo three method a nonsensical string.
+        This shouldn't work for obvious reasons.
+        """
+        schmuck_bait = "https://www.youtube.com/watch?v=VD6__C2Ht6M"
+        state_manager = StateManager()
+
+        with self.assertRaises(TypeError) as context:
+            modulo_three(schmuck_bait, state_manager)
+
+            self.assertTrue(
+                "Please enter Non-Negative Binary or Hexadecimal input."
+                in context.exception
+            )
+
+    def test_modulo_three_hexidecimal_case(self):
+        """
+        Call the modulo three method with a hexadecimal value. In this case we'll use "FE", which
+        is 254. 254 Modulo 3 will be 2.
+        """
+        test_input = "FE"
+        state_manager = StateManager()
+
+        self.assertEqual(modulo_three(test_input, state_manager), 2)
 
 
 class TestExecute(unittest.TestCase):

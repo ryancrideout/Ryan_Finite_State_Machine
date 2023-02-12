@@ -83,10 +83,75 @@ class TestStatemanager(unittest.TestCase):
         self.examine_state_manager_attributes(state_manager)
 
     # Test process_input
-    # TODO: This will be the meat and potatoes, I think.
+    def test_process_input_basic_case(self):
+        """
+        Testing the process input with a basic test case, such as 41 in binary.
+        101001 Modulo 3 will give us two.
+        """
+        state_manager = StateManager()
+        state_manager.process_input("101001")
 
-    # Test sanitize_input
-    # TODO: This will come in the future.
+        self.assertEqual(state_manager.current_state, state_manager.state_list[2])
+
+    def test_process_input_integer_case(self):
+        """
+        Testing the case where we feed process_input an integer. This wasn't in the
+        original scope, but I figure it'd be nice if the Finite State Machine could
+        work with binary strings and integer inputs.
+
+        After all, most people would call modulo on an integer input.
+        """
+        state_manager = StateManager()
+        state_manager.process_input(41)
+
+        self.assertEqual(state_manager.current_state, state_manager.state_list[2])
+
+    def test_process_input_float_case(self):
+        """
+        Handle an input that is a float - I.E., has a decimal value. For now we'll
+        just round the values but I acknowledge that we could make changes to the
+        logic so we return a decimal value.
+        """
+        state_manager = StateManager()
+        state_manager.process_input(1.2)
+
+        self.assertEqual(state_manager.current_state, state_manager.state_list[1])
+
+    def test_process_input_negative_value_case(self):
+        """
+        Case where we feed the process_input method a negative value. In the future,
+        it'd be possible to make something that accepts negative values, but for now
+        we just throw an error.
+        """
+        state_manager = StateManager()
+        with self.assertRaises(TypeError) as context:
+            state_manager.process_input(-666)
+
+            self.assertTrue("Please enter Non-Negative Number." in context.exception)
+
+    def test_process_input_negative_binary_value_case(self):
+        """
+        Attempt to feed process_input a negative binary string. This should still
+        fail on account of this being negative.
+        """
+        state_manager = StateManager()
+        with self.assertRaises(TypeError) as context:
+            state_manager.process_input("-1101")
+
+            self.assertTrue(
+                "Please enter Non-Negative Binary or Hexadecimal input."
+                in context.exception
+            )
+
+    def test_process_input_hexadecimal_case(self):
+        """
+        Give process_input a hexadecimal value - in this case "ABCDEF", which works
+        out to be 11259375, which Modulo 3 is 0.
+        """
+        state_manager = StateManager()
+        state_manager.process_input("ABCDEF")
+
+        self.assertEqual(state_manager.current_state, state_manager.state_list[0])
 
     # Test set_current_state
     def test_set_current_state_success_case(self):
@@ -129,8 +194,7 @@ class TestStatemanager(unittest.TestCase):
             state_manager.set_current_state(meaning_of_life)
 
             self.assertTrue(
-                "Error! Cannot set State to be a non-state."
-                in context.exception
+                "Error! Cannot set State to be a non-state." in context.exception
             )
 
     # Test current_state_output
