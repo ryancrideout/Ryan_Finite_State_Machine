@@ -106,8 +106,16 @@ class TestStatemanager(unittest.TestCase):
 
         self.assertEqual(state_manager.current_state, state_manager.state_list[2])
 
-    # Test sanitize_input
-    # TODO: This will come in the future.
+    def test_process_input_float_case(self):
+        """
+        Handle an input that is a float - I.E., has a decimal value. For now we'll
+        just round the values but I acknowledge that we could make changes to the
+        logic so we return a decimal value.
+        """
+        state_manager = StateManager()
+        state_manager.process_input(1.2)
+
+        self.assertEqual(state_manager.current_state, state_manager.state_list[1])
 
     # Test set_current_state
     def test_set_current_state_success_case(self):

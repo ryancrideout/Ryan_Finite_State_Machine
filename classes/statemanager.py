@@ -1,4 +1,5 @@
 from classes.state import State
+from classes.binarystringsanitizer import BinaryStringSanitizer
 
 
 class StateManager:
@@ -95,23 +96,12 @@ class StateManager:
 
         This implementation works for Modulo 3, but I think we'd have to tweak it to work
         with different modulos.
+        """
+        # Sanitize our binary string to ensure it's good to work with. If performance
+        # ever became a problem and we were confident about the inputs, we could
+        # probably remove the sanitization check.
+        binary_string = BinaryStringSanitizer.sanitize_input(binary_string)
 
-        NOTE: Should have a sanitize input class that gets called here, but also if we
-        cast a string to int and it's all zeros... is that okay? Well, no, we cast
-        ints to strings
-        """
-        # This was stolen from StackOverflow:
-        # https://stackoverflow.com/questions/699866/python-int-to-binary-string
-        if isinstance(binary_string, int):
-            # I'm assuming that if we DO get an integer, that it's going to be in
-            # base 10.
-            binary_string = "{0:b}".format(binary_string)
-
-        # Have to deal with all of the cases where we don't have a string. Non-strings
-        # should FAIL.
-        """
-        TAKE ALL LOGIC ABOVE AND PUT IT SOMEWHERE ELSE.
-        """
         for binary_integer in binary_string:
             input = int(binary_integer)
             # Note: 0's are "Falsy" and 1's are Truthy.
