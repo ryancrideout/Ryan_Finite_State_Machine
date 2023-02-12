@@ -1,15 +1,9 @@
 from classes.statemanager import StateManager
 
-# Set sail for adventure!
-
-# TODO:
-# - Add Readme on how to run this thing.
-# - UNIT TESTS (and End-to-End!)
-# - Incorporate EMAIL NOTES:
-#   - Accept Binary, Decimal, Hexadecimal, and numbers with decimal values
-#   - Should deal with Negative Values
-#   - Plus stupid strings.
-# BE SURE TO ADD ALL OF MY THOUGHTS
+"""
+This is the main function. As mentioned below, I put the executable command in a different file
+(which would be in run.py) as having it in THIS file caused problems for the unit tests.
+"""
 
 
 def modulo_three(string: str, state_manager: StateManager) -> int:
