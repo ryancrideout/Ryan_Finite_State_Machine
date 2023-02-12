@@ -73,6 +73,8 @@ class StateManager:
         """
         This is the implementation I was talking about that isn't scalable. If someone wanted to make this
         work with Modulo 5, for example, then they have to manually go in here and add two more States.
+
+        UPDATE:
         Upon further thought, this might be okay. For this exercise this works so I won't worry about it.
         """
         self.state_list = [
@@ -94,6 +96,13 @@ class StateManager:
 
         This implementation works for Modulo 3, but I think we'd have to tweak it to work
         with different modulos.
+
+        I think in theory there COULD be potential here implement bitwise shift operators,
+        (And maybe that's the point of the exercise?) but I feel like that could be opening
+        Pandora's box and would maybe make the code much less readable.
+
+        THAT, and I'm not too experienced with bitwise shifting so I didn't go for it. This
+        could be a good opportunity to learn about it though!
         """
         # Sanitize our binary string to ensure it's good to work with. If performance
         # ever became a problem and we were confident about the inputs, we could
