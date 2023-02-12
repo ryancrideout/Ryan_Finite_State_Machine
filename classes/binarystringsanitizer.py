@@ -17,6 +17,7 @@ ACCEPTED_CHARACTERS = [
     "C",
     "D",
     "E",
+    "F",
 ]
 
 
@@ -46,6 +47,8 @@ class BinaryStringSanitizer:
         # This was stolen from StackOverflow:
         # https://stackoverflow.com/questions/699866/python-int-to-binary-string
         if isinstance(input, int) or isinstance(input, float):
+            if input < 0:
+                raise TypeError("Please enter Non-Negative Number.")
             if isinstance(input, float):
                 input = int(input)
             return "{0:b}".format(input)

@@ -73,9 +73,7 @@ class StateManager:
         """
         This is the implementation I was talking about that isn't scalable. If someone wanted to make this
         work with Modulo 5, for example, then they have to manually go in here and add two more States.
-        I don't like that, as I'm pretty sure it violates one of the S.O.L.I.D principles.
-
-        TODO: Actually investigate if it violates S.O.L.I.D. principles haha.
+        Upon further thought, this might be okay. For this exercise this works so I won't worry about it.
         """
         self.state_list = [
             # State 0

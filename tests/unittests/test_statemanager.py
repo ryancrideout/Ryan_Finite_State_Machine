@@ -117,6 +117,32 @@ class TestStatemanager(unittest.TestCase):
 
         self.assertEqual(state_manager.current_state, state_manager.state_list[1])
 
+    def test_process_input_negative_value_case(self):
+        """
+        Case where we feed the process_input method a negative value. In the future,
+        it'd be possible to make something that accepts negative values, but for now
+        we just throw an error.
+        """
+        state_manager = StateManager()
+        with self.assertRaises(TypeError) as context:
+            state_manager.process_input(-666)
+
+            self.assertTrue("Please enter Non-Negative Number." in context.exception)
+
+    def test_process_input_negative_binary_value_case(self):
+        """
+        Attempt to feed process_input a negative binary string. This should still
+        fail on account of this being negative.
+        """
+        state_manager = StateManager()
+        with self.assertRaises(TypeError) as context:
+            state_manager.process_input("-1101")
+
+            self.assertTrue(
+                "Please enter Non-Negative Binary or Hexadecimal input."
+                in context.exception
+            )
+
     # Test set_current_state
     def test_set_current_state_success_case(self):
         """
