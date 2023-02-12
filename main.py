@@ -48,7 +48,7 @@ def execute():
 
 
 """
-So turns out that this execute command at the bottom of the script really, really hampers with the ability to write unit tests.
+So turns out that this `execute()` command at the bottom of the script really, really hampers with the ability to write unit tests.
 I discovered that when you import a script/module, it runs all of the code, so any executables will be executed. At least,
 that's what I think what happened. If that is what actually happened, I didn't discover this for so long because that's just
 not how I've ever written code at work.

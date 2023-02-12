@@ -98,13 +98,13 @@ class TestExecute(unittest.TestCase):
     @patch("builtins.input", create=True)
     def test_execute_success_case(self, mocked_input, mock_print):
         """
-        I had a hard test making this test comprehensive - while this works, it doesn't really strike
+        I had a hard time making this test comprehensive - while this works, it doesn't really strike
         me as an impressive test. Sure it tells us that it runs and completes just fine, but not much
         else beyond that.
 
         I already wrote it though so I'll leave it in.
 
-        I think the test functions as it is because the mocks aren't covering the input/print statements
+        I think the test functions as it does because the mocks aren't covering the input/print statements
         that are nested in the while loop of the execute command, but I'm not going to go down that rabbit
         hole as I don't think that's the primary goal of this exercise.
         """

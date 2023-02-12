@@ -25,7 +25,12 @@ class BinaryStringSanitizer:
     """
     Helper class to help sanitize inputs for the StateManager class. However, with how this is built,
     I could see this class having life doing other various tasks, which is why I broke it out into
-    a class.
+    a class. I could even see breaking out individual components of sanitize_input into separate
+    methods - like maybe we'd want to separate the logic of checking for decimal values and strings,
+    for example.
+
+    All I'm really trying to say is that I think there's room to expand this and make it more flexible.
+    I didn't do so here otherwise I could have been here forever optimizing this.
 
     I debated about just making this a function, but I figured a class with static methods would be
     alright.
