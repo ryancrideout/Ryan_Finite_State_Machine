@@ -143,6 +143,16 @@ class TestStatemanager(unittest.TestCase):
                 in context.exception
             )
 
+    def test_process_input_hexadecimal_case(self):
+        """
+        Give process_input a hexadecimal value - in this case "ABCDEF", which works
+        out to be 11259375, which Modulo 3 is 0.
+        """
+        state_manager = StateManager()
+        state_manager.process_input("ABCDEF")
+
+        self.assertEqual(state_manager.current_state, state_manager.state_list[0])
+
     # Test set_current_state
     def test_set_current_state_success_case(self):
         """
