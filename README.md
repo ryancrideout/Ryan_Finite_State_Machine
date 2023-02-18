@@ -16,4 +16,4 @@ Also, I know I made a few comments about making changes to increase the performa
 
 In my career experience, I've never had to care about optimizations on this level (normally the issue is much bigger and more easily identifable), but that doesn't mean there couldn't exist situations where we really need to be "as tight as possible" when it comes to efficiency. Like while I get that this could just be construed as a good mental exercise, I could also see value in developing a mathematical operator that's highly efficient, especially if we're doing hundreds of thousands of calculations.
 
-# NOTE: The classes in here really could have been cleaned up because I had a lot of mutable attributes when they should have been immutable.
+### NOTE: The classes in here really could have been cleaned up because I had a lot of mutable attributes when they should have been immutable.
